@@ -15,7 +15,16 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.user = user;
+        },
+        clearSearch(state) {
+            state.search = '';
+        },
+        clearUser(state) {
+            state.user = {};
         }
+    },
+    getters: {
+        getUser: state => state.user
     },
     actions: {},
     modules: {},

@@ -5,7 +5,8 @@ class GithubFac {
     constructor() {
         this.endpoints = {
             getUser: (userName) => `https://api.github.com/users/${userName}`,
-            getUsers: (searchString) => `https://api.github.com/search/users?q=${searchString}`
+            getUsers: (searchString) => `https://api.github.com/search/users?q=${searchString}`,
+            getRepos: (userName) => `https://api.github.com/users/${userName}/repos`
         };
     }
 
