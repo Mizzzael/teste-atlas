@@ -12,6 +12,7 @@
         "axios": "^0.21.0",
         "core-js": "^3.6.5",
         "font-awesome": "^4.7.0",
+        "github-lang-colors": "^1.0.4",
         "lottie-web": "^5.7.5",
         "postcss": "^8.2.1",
         "tailwindcss": "^2.0.1",

@@ -21,10 +21,15 @@ const routes = [{
         component: () =>
             import ("../views/Profile.vue"),
         children: [{
-            path: "/",
+            path: "",
             name: "Bio",
             component: () =>
                 import ("../views/components/ProfileBio.vue"),
+        }, {
+            path: "repos",
+            name: "Repos",
+            component: () =>
+                import ("../views/components/ProfileRepos.vue"),
         }]
     }
 ];

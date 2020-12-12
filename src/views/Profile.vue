@@ -50,25 +50,29 @@
                 </section>
             </header>
             <section class="profile.body w-full flex flex-wrap justify-center items-start">
-                <aside class="profile.aside md:w-4/12 w-full md:shadow">
+                <aside class="profile.aside lg:w-3/12 md:w-4/12 w-full md:shadow">
                     <section class="w-full md:pt-16">
                         <nav class="w-full">
                             <ul class="bg-blueg-100 w-full flex flex-wrap">
-                                <li class="profile.navigation profile.navigation:active md:w-full w-6/12 text-lg py-4 text-center relative">
-                                    <a href="Javascript: void(0)">
-                                        Sobre
-                                    </a>
+                                <li class="profile.navigation md:w-full w-6/12 relative">
+                                    <router-link :to="`/user/${userParam}/`" >
+                                        <span class="profile.navigation_button text-lg py-4 text-center w-full block">
+                                            Sobre
+                                        </span>
+                                    </router-link>
                                 </li>
-                                <li class="profile.navigation md:w-full w-6/12 text-lg py-4 text-center relative">
-                                    <a href="Javascript: void(0)">
-                                        Projetos
-                                    </a>
+                                <li id=repos_button class="profile.navigation md:w-full w-6/12 relative">
+                                    <router-link :to="`/user/${userParam}/repos`" >
+                                        <span class="profile.navigation_button text-lg py-4 text-center w-full block">
+                                            Projetos
+                                        </span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </nav>
                     </section>
                 </aside>
-                <section class="md:w-8/12 w-full profile.content overflow-y-auto">
+                <section class="lg:w-9/12 md:w-8/12 w-full profile.content overflow-y-auto">
                     <router-view />
                 </section>
             </section>
@@ -92,7 +96,9 @@ export default {
     name: "Profile",
     data() {
         return {
-            user: {}
+            user: {},
+            routeName: '',
+            userParam: this.$route.params.user
         }
     },
     computed: {
@@ -103,7 +109,7 @@ export default {
     methods: {
         setUserState(user) {
             this.$store.commit('setUser', user);
-        },
+        }
     },
     components: {
         HeaderGeneric,
@@ -111,8 +117,8 @@ export default {
         Loading
     },
     mounted() {
-        const user = this.getUser;
-        console.log(user.node_id, github_api);
+        const user = this.getUser;        
+        console.log(user.node_id, github_api, this.$router);
         // if(!user.node_id) {
         //     github_api.getUser(this.$route.params.user).then(({data}) => {
         //         this.setUserState(data);
@@ -141,6 +147,10 @@ export default {
             background-size 100%
             background-repeat no-repeat
 
+    .profile\\.navigation_button
+        &:focus
+            outline none
+
     @media only screen and (max-width: 768px)
         .profile\\.header
             padding-top 5px
@@ -167,8 +177,10 @@ export default {
         .profile\\.navigation
             &:nth-child(odd)
                 border-right 1px solid #CBD5E1
-            &\\:active
-                border-bottom solid 2px #3B82F6
+        
+        .router-link-exact-active
+            & .profile\\.navigation_button
+                border-bottom solid 4px #3B82F6
 
     @media only screen and (min-width: 768px)
         .profile\\.header
@@ -206,7 +218,9 @@ export default {
         .profile\\.navigation
             &:nth-child(odd)
                 border-bottom 1px solid #CBD5E1
-            &\\:active
+
+        .router-link-exact-active
+            & .profile\\.navigation_button
                 border-right solid 4px #3B82F6
 
     @media only screen and (min-width: 1024px)
@@ -230,5 +244,12 @@ export default {
         .profile\\.infos
             @extends .profile\\.username
             width calc((960px - 160px) * 0.6)
+
+    @media only screen and (min-width: 1201px)
+        .profile\\.username
+            width calc((1200px - 160px) * 0.4)
+        
+        .profile\\.infos
+            width calc((1200px - 160px) * 0.6)
     
 </style>

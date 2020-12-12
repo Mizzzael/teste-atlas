@@ -33,4 +33,7 @@
     @media only screen and (min-width: 1024px)
         .HeaderGen\\.box
             max-width 960px
+    @media only screen and (min-width: 1201px)
+        .HeaderGen\\.box
+            max-width 1200px
 </style>

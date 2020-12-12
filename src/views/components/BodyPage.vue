@@ -12,4 +12,7 @@ export default {
     @media only screen and (min-width: 1024px)
         .body-page
             max-width 960px
+    @media only screen and (min-width: 1201px)
+        .body-page
+            max-width 1200px
 </style>
