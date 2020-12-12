@@ -24,12 +24,12 @@ const routes = [{
             path: "",
             name: "Bio",
             component: () =>
-                import ("../views/components/ProfileBio.vue"),
+                import ("../components/ProfileBio.vue"),
         }, {
             path: "repos",
             name: "Repos",
             component: () =>
-                import ("../views/components/ProfileRepos.vue"),
+                import ("../components/ProfileRepos.vue"),
         }]
     }
 ];

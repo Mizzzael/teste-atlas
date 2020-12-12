@@ -26,7 +26,27 @@
                     </section>
                     <hr class="bg-gray-300 md:block hidden" />
                 </header>
-                <section class="w-full py-2 px-2">
+                <section class="w-full py-8 px-2">
+                    <section class="md:w-11/12 mx-auto flex flex-wrap justify-start items-center">
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                        <Thumb />
+                    </section>
+                    <section class="w-full text-center md:block hidden">
+                        <button class="mx-auto text-md inline-block my-4 py-2 md:w-4/12 w-8/12 text-white bg-gray-300 rounded-sm">
+                            Mais Usuários
+                        </button>
+                    </section>
+                    <section class="md:w-5/12 w-6/12 mx-auto">
+                        <Loading />
+                    </section>
                 </section>
             </section>
         </BodyPage>      
@@ -34,14 +54,18 @@
 </template>
 
 <script>
-import HeaderGeneric from "./components/HeaderGeneric.vue";
-import BodyPage from "./components/BodyPage.vue";
+import HeaderGeneric from "../components/HeaderGeneric.vue"
+import BodyPage from "../components/BodyPage.vue"
+import Thumb from "../components/UsersThumb.vue"
+import Loading from "../components/Loading.vue"
 
 export default {
     name: 'Users',
     components: {
         HeaderGeneric,
-        BodyPage
+        BodyPage,
+        Thumb,
+        Loading
     }
 }
 </script>

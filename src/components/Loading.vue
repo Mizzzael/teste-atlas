@@ -12,7 +12,7 @@
 
 <script>
 import Lottie from 'lottie-web';
-import Bunny from "../../assets/animations/15355-bunny.json";
+import Bunny from "../assets/animations/15355-bunny.json";
 
 export default {
     name: 'Loading',

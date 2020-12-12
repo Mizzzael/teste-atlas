@@ -86,9 +86,9 @@
 <script>
 import Github from "../../src/assets/js/Github.js";
 import {mapGetters} from "vuex"
-import HeaderGeneric from "./components/HeaderGeneric.vue";
-import BodyPage from "./components/BodyPage.vue";
-import Loading from "./components/Loading.vue";
+import HeaderGeneric from "../components/HeaderGeneric.vue";
+import BodyPage from "../components/BodyPage.vue";
+import Loading from "../components/Loading.vue";
 
 const github_api = new Github();
 
