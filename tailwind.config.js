@@ -21,9 +21,10 @@ module.exports = {
             yellow: colors.amber,
             teal: colors.teal,
             green: colors.green,
-            blue: colors.indigo,
+            blue: colors.blue,
             violet: colors.violet,
-            white: colors.white
+            white: colors.white,
+            blueg: colors.blueGray
         },
         boxShadow: {
             sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
