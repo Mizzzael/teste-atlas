@@ -3,20 +3,44 @@
         <section class="md:w-full thumb.photo-box">
             <figure class="thumb.photo shadow relative rounded-full mx-auto md:mb-4">
                 <div class="thumb.photo_canvas overflow-hidden left-0 right-0 top-0 bottom-0 absolute m-auto rounded-full">
-                    <img src="../assets/img/photo.jpg" alt="">
+                    <img :src="photo" alt="">
                 </div>
             </figure>
         </section>
         <section class="md:w-full thumb.label">
-            <h5 class="md:text-center lg:text-lg md:text-sm text-lg text-blue-800">
-                meelbianco_
-            </h5>
+            <a v-on:click="goTo()" href="Javascript: void(0)">
+                <span class="md:text-center lg:text-md md:text-sm text-lg text-blue-800 block">
+                    {{login}}
+                </span>
+            </a>
         </section>
     </section>
 </template>
 <script>
 export default {
-    name: "Thumb"
+    name: "Thumb",
+    props: ['user'],
+    data() {
+        return {
+            photo: '',
+            login: ''
+        }
+    },
+    methods: {
+        goTo() {
+            this.$store.commit('clearUser');
+            this.$router.push(`/user/${this.login}/`);
+        }
+    },
+    mounted() {
+        const {
+            avatar_url,
+            login
+        } = this.user;
+
+        this.photo = avatar_url;
+        this.login = login;
+    }
 }
 </script>
 <style lang="stylus">

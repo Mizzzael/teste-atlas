@@ -24,7 +24,8 @@ export default new Vuex.Store({
         }
     },
     getters: {
-        getUser: state => state.user
+        getUser: state => state.user,
+        getSearch: state => state.search,
     },
     actions: {},
     modules: {},

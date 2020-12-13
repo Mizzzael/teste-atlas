@@ -1,30 +1,30 @@
 <template>
     <section id="profile" class="w-full">
         <HeaderGeneric title="Perfil" />
-        <BodyPage v-if="!user.node_id">
+        <BodyPage v-if="user.node_id">
             <header class="profile.header w-full relative">
                 <section class="profile.header_row relative w-full flex flex-wrap items-end">
                     <section class="px-1 md:mx-0 mx-auto">
                         <figure class="profile.photo rounded-full bg-white p-1 overflow-hidden relative shadow mx-auto">
                             <section class="profile.photo_canvas rounded-full overflow-hidden absolute m-auto top-0 bottom-0 right-0 left-0">
-                                <img src="../assets/img/photo.jpg" alt="">
+                                <img :src="user.avatar_url" alt="">
                             </section>
                         </figure>
                     </section>
                     <section class="profile.username">
                         <div class="md:pl-8 md:pb-4 inline-block md:w-auto w-full">
-                            <h2 class="profile.username_name lg:text-2xl text-blue-900 md:text-xl font-bold md:text-right text-center">
-                                Mel Bianco
+                            <h2 v-if="user.name" class="profile.username_name lg:text-2xl text-blue-900 md:text-xl font-bold md:text-right text-center">
+                                {{user.name}}
                             </h2>
-                            <h4 class="lg:text-md text-sm md:text-right text-center text-gray-600 font-light">
-                                <i class="fa fa-user"></i> meelbianco_
+                            <h4 v-if="user.login" class="lg:text-md text-sm md:text-right text-center text-gray-600 font-light">
+                                <i class="fa fa-user"></i> {{user.login}}
                             </h4>
                         </div>
                     </section>
                     <section class="profile.infos flex flex-wrap justify-end items-center px-2 md:pb-2 md:py-0 py-4">
                         <div class="lg:px-4 md:px-2 md:w-auto w-4/12">
                             <p class="text-center md:text-xl text-sm text-blue-900 m-0">
-                                <i class="fa fa-male"></i> <small>122</small>
+                                <i class="fa fa-male"></i> <small>{{user.following}}</small>
                             </p>
                             <p class="text-center md:text-xl text-sm text-blue-900 m-0">
                                 Seguindo
@@ -32,7 +32,7 @@
                         </div>
                         <div class="lg:px-4 md:px-2 md:w-auto w-4/12">
                             <p class="text-center md:text-xl text-sm text-blue-900 m-0">
-                                <i class="fa fa-folder-open"></i> <small>31</small>
+                                <i class="fa fa-folder-open"></i> <small>{{user.public_repos}}</small>
                             </p>
                             <p class="text-center md:text-xl text-sm text-blue-900 m-0">
                                 Projetos
@@ -40,7 +40,7 @@
                         </div>
                         <div class="lg:px-4 md:px-2 md:w-auto w-4/12">
                             <p class="text-center md:text-xl text-sm text-blue-900 m-0">
-                                <i class="fa fa-users"></i> <small>44</small>
+                                <i class="fa fa-users"></i> <small>{{user.followers}}</small>
                             </p>
                             <p class="text-center md:text-xl text-sm text-blue-900 m-0">
                                 Seguidores
@@ -72,12 +72,12 @@
                         </nav>
                     </section>
                 </aside>
-                <section class="lg:w-9/12 md:w-8/12 w-full profile.content overflow-y-auto">
+                <section id=profileviews class="lg:w-9/12 md:w-8/12 w-full profile.content overflow-y-auto">
                     <router-view />
                 </section>
             </section>
         </BodyPage>
-        <section v-if="user.node_id" class="w-3/12 mx-auto">
+        <section v-if="!user.node_id" class="w-3/12 mx-auto">
             <Loading />
         </section>
     </section>
@@ -118,15 +118,14 @@ export default {
     },
     mounted() {
         const user = this.getUser;        
-        console.log(user.node_id, github_api, this.$router);
-        // if(!user.node_id) {
-        //     github_api.getUser(this.$route.params.user).then(({data}) => {
-        //         this.setUserState(data);
-        //         this.user = this.getUser;
-        //     });
-        // } else {
-        //     this.user = user;
-        // }
+        if(!user.node_id || this.$route.params.user !== user.login) {
+            github_api.getUser(this.$route.params.user).then(({data}) => {
+                this.setUserState(data);
+                this.user = this.getUser;
+            });
+        } else {
+            this.user = user;
+        }
     }
 }
 </script>

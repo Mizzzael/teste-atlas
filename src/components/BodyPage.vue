@@ -1,5 +1,5 @@
 <template>
-    <section class="body-page container bg-white rounded-sm mx-auto md:shadow md:my-8">
+    <section class="body-page container bg-white rounded-sm mx-auto md:shadow md:mt-8">
         <slot></slot>
     </section>
 </template>
