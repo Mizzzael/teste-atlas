@@ -4,30 +4,30 @@ import Vuex, { createLogger } from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        search: '',
-        users: [],
-        user: {}
+  state: {
+    search: "",
+    users: [],
+    user: {}
+  },
+  mutations: {
+    setSearch(state, search) {
+      state.search = search;
     },
-    mutations: {
-        setSearch(state, search) {
-            state.search = search;
-        },
-        setUser(state, user) {
-            state.user = user;
-        },
-        clearSearch(state) {
-            state.search = '';
-        },
-        clearUser(state) {
-            state.user = {};
-        }
+    setUser(state, user) {
+      state.user = user;
     },
-    getters: {
-        getUser: state => state.user,
-        getSearch: state => state.search,
+    clearSearch(state) {
+      state.search = "";
     },
-    actions: {},
-    modules: {},
-    plugins: [createLogger()]
+    clearUser(state) {
+      state.user = {};
+    }
+  },
+  getters: {
+    getUser: state => state.user,
+    getSearch: state => state.search
+  },
+  actions: {},
+  modules: {},
+  plugins: [createLogger()]
 });
