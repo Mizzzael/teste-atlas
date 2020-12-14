@@ -120,7 +120,6 @@ import End from "../components/End.vue";
 import Github from "../assets/js/Github.js";
 // Teste import ProdutsTeste from "../assets/js/teste.js"
 const github_api = new Github();
-
 let keyupTimeout = false;
 export default {
   name: "Users",
@@ -202,20 +201,47 @@ export default {
         this.loading = false;
       });
     }
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        const { height } = window.document
-          .querySelector("html")
-          .getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if (window.scrollY === height - windowHeight) {
-          this.getNextPage();
-        }
-      },
-      false
-    );
+    if (
+      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          const { height } = window.document
+            .querySelector("html")
+            .getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          if (window.scrollY === height - windowHeight) {
+            this.getNextPage();
+          }
+        },
+        false
+      );
+    }
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      window.addEventListener(
+        "touchmove",
+        () => {
+          const { height } = window.document
+            .querySelector("html")
+            .getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          if (
+            Math.floor(window.scrollY) >=
+            Math.floor(height - windowHeight)
+          ) {
+            this.getNextPage();
+          }
+        },
+        false
+      );
+    }
   },
   components: {
     HeaderGeneric,

@@ -25,9 +25,7 @@ import End from "./End.vue";
 import { mapGetters } from "vuex";
 import Repo from "../components/Repo.vue";
 import Github from "../assets/js/Github.js";
-
 const github_api = new Github();
-
 export default {
   name: "Repos",
   data() {
@@ -39,7 +37,6 @@ export default {
         page: 1,
         per_page: 8
       },
-      pageNumber: 0,
       loading: false,
       endPage: false
     };
@@ -52,10 +49,7 @@ export default {
     makeQuery(query, callback = function() {}) {
       github_api.getRepos(query).then(({ data }) => {
         this.repos = [...this.repos, ...data];
-        if (data.length < 8) this.endPage = true;
-        this.pageNumber = Math.round(
-          parseInt(data.total_count) / this.query.per_page
-        );
+        if (data.length < 8 || !data.length) {this.endPage = true;}
         callback(data);
       });
     },
@@ -107,49 +101,53 @@ export default {
     this.makeQuery(this.query, () => {
       this.loading = false;
     });
-
-    const profileviews = window.document.querySelector("#profileviews");
-    profileviews.addEventListener(
-      "scroll",
-      () => {
-        if (
-          !window.document.querySelector("#repos") ||
-          this.loading ||
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-        )
-          return;
-        const { height } = window.document
-          .querySelector("#repos")
-          .getBoundingClientRect();
-        const windowHeight = profileviews.getBoundingClientRect().height;
-        if (profileviews.scrollTop === height - windowHeight && !this.endPage) {
-          this.getNextPage();
-        }
-      },
-      false
-    );
-
-    const body = window.document.querySelector("body");
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-        ) {
-          if (this.loading) return;
-          const { height } = body.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          if (window.scrollY === height - windowHeight && !this.endPage) {
+    if (
+      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      const profileviews = window.document.querySelector("#profileviews");
+      profileviews.addEventListener(
+        "scroll",
+        () => {
+          if (!window.document.querySelector("#repos") || this.loading) return;
+          const { height } = window.document
+            .querySelector("#repos")
+            .getBoundingClientRect();
+          const windowHeight = profileviews.getBoundingClientRect().height;
+          if (
+            profileviews.scrollTop === height - windowHeight &&
+            !this.endPage
+          ) {
             this.getNextPage();
           }
-        }
-      },
-      false
-    );
+        },
+        false
+      );
+    }
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      const body = window.document.querySelector("body");
+      window.addEventListener(
+        "touchmove",
+        () => {
+          if (this.loading) return;
+          const { height } = body.getBoundingClientRect();
+          const windowHeight = window.innerHeight;          
+          if (
+            Math.floor(window.scrollY) >=
+              Math.floor(height - windowHeight) &&
+            !this.endPage
+          ) {
+            this.getNextPage();
+          }
+        },
+        false
+      );
+    }
   }
 };
 </script>
