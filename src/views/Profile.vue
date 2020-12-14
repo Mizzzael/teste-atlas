@@ -25,13 +25,13 @@
             <div class="md:pl-8 md:pb-4 inline-block md:w-auto w-full">
               <h2
                 v-if="user.name"
-                class="profile.username_name lg:text-2xl text-blue-900 md:text-xl font-bold md:text-right text-center"
+                class="profile.username_name lg:text-2xl text-blue-900 md:text-lg text-sm font-bold md:text-right text-center"
               >
                 {{ user.name }}
               </h2>
               <h4
                 v-if="user.login"
-                class="lg:text-md text-sm md:text-right text-center text-gray-600 font-light"
+                class="lg:text-md text-xs md:text-right text-center text-gray-600 font-light"
               >
                 <i class="fa fa-user"></i> {{ user.login }}
               </h4>
@@ -41,27 +41,27 @@
             class="profile.infos flex flex-wrap justify-end items-center px-2 md:pb-2 md:py-0 py-4"
           >
             <div class="lg:px-4 md:px-2 md:w-auto w-4/12">
-              <p class="text-center md:text-xl text-sm text-blue-900 m-0">
+              <p class="text-center lg:text-xl text-sm text-blue-900 m-0">
                 <i class="fa fa-male"></i> <small>{{ user.following }}</small>
               </p>
-              <p class="text-center md:text-xl text-sm text-blue-900 m-0">
+              <p class="text-center lg:text-xl text-sm text-blue-900 m-0">
                 Seguindo
               </p>
             </div>
             <div class="lg:px-4 md:px-2 md:w-auto w-4/12">
-              <p class="text-center md:text-xl text-sm text-blue-900 m-0">
+              <p class="text-center lg:text-xl text-sm text-blue-900 m-0">
                 <i class="fa fa-folder-open"></i>
                 <small>{{ user.public_repos }}</small>
               </p>
-              <p class="text-center md:text-xl text-sm text-blue-900 m-0">
+              <p class="text-center lg:text-xl text-sm text-blue-900 m-0">
                 Projetos
               </p>
             </div>
             <div class="lg:px-4 md:px-2 md:w-auto w-4/12">
-              <p class="text-center md:text-xl text-sm text-blue-900 m-0">
+              <p class="text-center lg:text-xl text-sm text-blue-900 m-0">
                 <i class="fa fa-users"></i> <small>{{ user.followers }}</small>
               </p>
-              <p class="text-center md:text-xl text-sm text-blue-900 m-0">
+              <p class="text-center lg:text-xl md:text-sm text-sm text-blue-900 m-0">
                 Seguidores
               </p>
             </div>
@@ -120,9 +120,7 @@ import { mapGetters } from "vuex";
 import HeaderGeneric from "../components/HeaderGeneric.vue";
 import BodyPage from "../components/BodyPage.vue";
 import Loading from "../components/Loading.vue";
-
 const github_api = new Github();
-
 export default {
   name: "Profile",
   data() {
@@ -174,18 +172,15 @@ export default {
         background-position bottom center
         background-size 100%
         background-repeat no-repeat
-
 .profile\\.navigation_button
     &:focus
         outline none
-
 @media only screen and (max-width: 768px)
     .profile\\.header
         padding-top 5px
         &:before
             height 100px
             background-size 140%
-
     .profile\\.photo
         width 90px
         height 90px
@@ -193,90 +188,84 @@ export default {
         &_canvas
             width 80px
             height 80px
-
     .profile\\.username
         margin-top 25px
         width 100%
-
     .profile\\.infos
         @extends .profile\\.username
         margin-top 0
-
     .profile\\.navigation
         &:nth-child(odd)
             border-right 1px solid #CBD5E1
-
     .router-link-exact-active
         & .profile\\.navigation_button
             border-bottom solid 4px #3B82F6
-
 @media only screen and (min-width: 768px)
     .profile\\.header
         padding-top 35px
         &:before
-            height 160px
-
+            height 294px
     .profile\\.photo
-        width 125px
-        height 125px
-        bottom -20px
+        width 253px
+        height 253px
+        bottom -40px
         &_canvas
-            width 115px
-            height 115px
-
+            width 238px
+            height 238px
     .profile\\.username
         margin-top 20px
-        width calc((768px - 125px) * 0.4)
+        width calc((768px - 261px) * 0.4)
         &_name
             color #000000
-
     .profile\\.infos
         @extends .profile\\.username
-        width calc((768px - 125px) * 0.58)
-
+        width calc((768px - 261px) * 0.58)
     .profile\\.body
         height calc(100vh - 314px)
-
     .profile\\.aside
         @extends .profile\\.body
-
     .profile\\.content
         @extends .profile\\.body
-
     .profile\\.navigation
         &:nth-child(odd)
             border-bottom 1px solid #CBD5E1
-
     .router-link-exact-active
         & .profile\\.navigation_button
             border-right solid 4px #3B82F6
-
 @media only screen and (min-width: 1024px)
     .profile\\.header
         padding-top 55px
         &:before
-            height 200px
-
+            height 303px
     .profile\\.photo
-        width 145px
-        height 145px
+        width 240px
+        height 240px
         bottom -30px
         &_canvas
-            width 135px
-            height 135px
-
+            width 230px
+            height 230px
     .profile\\.username
         margin-top 30px
-        width calc((960px - 160px) * 0.4)
-
+        width calc((960px - 248px) * 0.4)
     .profile\\.infos
         @extends .profile\\.username
-        width calc((960px - 160px) * 0.6)
-
+        width calc((960px - 248px) * 0.6)
 @media only screen and (min-width: 1201px)
+    .profile\\.header
+        padding-top 55px
+        &:before
+            height 363px
+    .profile\\.photo
+        width 300px
+        height 300px
+        bottom -30px
+        &_canvas
+            width 290px
+            height 290px
     .profile\\.username
-        width calc((1200px - 160px) * 0.4)
-
+        margin-top 30px
+        width calc((1200px - 308px) * 0.4)
     .profile\\.infos
-        width calc((1200px - 160px) * 0.6)
+        @extends .profile\\.username
+        width calc((1200px - 308px) * 0.6)
 </style>
