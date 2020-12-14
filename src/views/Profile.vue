@@ -294,4 +294,5 @@ export default {
     .profile\\.infos
         @extends .profile\\.username
         width calc((1200px - 308px) * 0.6)
+        
 </style>
