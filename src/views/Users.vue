@@ -203,19 +203,48 @@ export default {
       });
     }
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        const { height } = window.document
-          .querySelector("html")
-          .getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if (window.scrollY === height - windowHeight) {
-          this.getNextPage();
-        }
-      },
-      false
-    );
+    if (
+      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          const { height } = window.document
+            .querySelector("html")
+            .getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          if (window.scrollY === height - windowHeight) {
+            this.getNextPage();
+          }
+        },
+        false
+      );
+    }
+
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      window.addEventListener(
+        "touchmove",
+        () => {
+          const { height } = window.document
+            .querySelector("html")
+            .getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          if (
+            Math.floor(window.scrollY) >=
+            Math.floor(height - windowHeight)
+          ) {
+            this.getNextPage();
+          }
+        },
+        false
+      );
+    }
   },
   components: {
     HeaderGeneric,

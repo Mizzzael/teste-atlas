@@ -6,6 +6,7 @@ npm run build
 cd dist
 
 git init
+cp ./index.html ./404.html
 git add -A
 git commit -m 'deploy'
 #Todo: Executar esse comando com as sus credenciais de acesso.
